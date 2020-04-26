@@ -15,7 +15,6 @@ import Footer from './components/Footer';
 
 const Login = () => {
   const navigation = useNavigation();
-
   return (
     <SafeAreaView style={style.backgroundLogin}>
       <ImageBackground

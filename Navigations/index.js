@@ -6,12 +6,18 @@ import LandingPage from './LandingPage';
 
 const Stack = createStackNavigator();
 
+const landingPageOptions = {
+  header: () => null,
+};
+
 const MyStack = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="LandingPage">
         <Stack.Screen name="Home">{() => <Home />}</Stack.Screen>
-        <Stack.Screen name="LandingPage">{() => <LandingPage />}</Stack.Screen>
+        <Stack.Screen options={landingPageOptions} name="LandingPage">
+          {() => <LandingPage />}
+        </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
