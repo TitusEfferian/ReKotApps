@@ -1,5 +1,12 @@
 import React, {memo} from 'react';
-import {View, Text, Image, SafeAreaView, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  ImageBackground,
+} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import Logo from './components/Logo';
 import Title from './components/Title';
@@ -11,20 +18,22 @@ const Login = () => {
 
   return (
     <SafeAreaView style={style.backgroundLogin}>
-      <View style={style.container}>
+      <ImageBackground
+        style={style.container}
+        imageStyle={style.imageStyle}
+        source={require('../assets/BackgroundAngkot.png')}>
         <Logo />
         <Title />
         <Button text="Login" type="login" marginTop={119} />
         <Button text="Daftar" type="daftar" marginTop={30} />
         <Footer />
-      </View>
+      </ImageBackground>
     </SafeAreaView>
   );
 };
 
 const style = StyleSheet.create({
   backgroundLogin: {
-    backgroundColor: '#E8E8E8',
     flex: 1,
   },
   container: {
@@ -32,6 +41,9 @@ const style = StyleSheet.create({
     paddingLeft: 16,
     paddingRight: 16,
     flex: 1,
+  },
+  imageStyle: {
+    opacity: 0.4,
   },
 });
 

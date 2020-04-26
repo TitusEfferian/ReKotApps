@@ -1,10 +1,19 @@
-import React, {memo} from 'react';
+import React, {memo, useCallback} from 'react';
 import {TouchableOpacity, StyleSheet, Text} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 const Button = ({text, type, marginTop}) => {
+  const navigation = useNavigation();
+
+  const handleGoToLoginPage = useCallback(() => {
+    navigation.navigate('Home');
+  }, [navigation]);
+
   if (type === 'login') {
     return (
-      <TouchableOpacity style={[styles.LoginButton, {marginTop}]}>
+      <TouchableOpacity
+        style={[styles.LoginButton, {marginTop}]}
+        onPress={handleGoToLoginPage}>
         <Text style={styles.LoginFont}>{text}</Text>
       </TouchableOpacity>
     );
