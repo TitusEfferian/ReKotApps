@@ -2,11 +2,12 @@ import React, {memo} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import Spinner from '../../../components/Spinner';
 
-const Button = () => {
+const Button = ({handleOnPress, isLoading}) => {
   return (
     <View style={styles.buttonContainer}>
-      <TouchableOpacity style={styles.buttonStyle}>
-        <Text style={styles.textColor}>Daftar</Text>
+      <TouchableOpacity style={styles.buttonStyle} onPress={handleOnPress}>
+        {isLoading && <Spinner spinnerColor="white" />}
+        {!isLoading && <Text style={styles.textColor}>Daftar</Text>}
       </TouchableOpacity>
     </View>
   );

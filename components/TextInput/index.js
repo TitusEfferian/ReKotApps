@@ -1,13 +1,15 @@
 import React, {memo} from 'react';
 import {View, Text, StyleSheet, TextInput} from 'react-native';
 
-const CustomTextInput = ({marginTop, label}) => {
+const CustomTextInput = ({marginTop, label, handleOnChange, isPassword}) => {
   return (
     <View style={[styles.textInputContainer, {marginTop}]}>
       <Text style={styles.textStyle}>{label}</Text>
       <TextInput
         style={styles.textInputStyle}
         underlineColorAndroid="#B32727"
+        onChangeText={handleOnChange}
+        secureTextEntry={isPassword}
       />
     </View>
   );
