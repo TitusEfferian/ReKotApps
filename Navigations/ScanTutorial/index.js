@@ -1,6 +1,8 @@
 import React, {memo} from 'react';
-import {Text, StyleSheet, SafeAreaView, ScrollView} from 'react-native';
+import {Text, StyleSheet, SafeAreaView, ScrollView, Image} from 'react-native';
 import Logo from './components/Logo';
+import img from './assets/Stiker-KIR-Scania1.png';
+import Button from './components/Button';
 
 const ScanTutorial = () => {
   return (
@@ -11,6 +13,13 @@ const ScanTutorial = () => {
           Scan QR code yang terdapat dalam stiker KIR. Stiker KIR dapat
           ditemukan di pintu angkot.
         </Text>
+        <Image
+          style={styles.imageStyle}
+          width={240}
+          height={180}
+          source={img}
+        />
+        <Button />
       </ScrollView>
     </SafeAreaView>
   );
@@ -24,6 +33,9 @@ const styles = StyleSheet.create({
   scrollViewContainer: {
     alignItems: 'center',
     paddingHorizontal: 60,
+  },
+  imageStyle: {
+    marginTop: 16,
   },
   textStyle: {
     fontSize: 16,
