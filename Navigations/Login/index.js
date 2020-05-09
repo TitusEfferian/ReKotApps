@@ -10,6 +10,7 @@ import Logo from './components/Logo';
 import TextInput from '../../components/TextInput';
 import AutoLogin from './components/AutoLogin';
 import Button from './components/Button';
+import DontHaveAccount from './components/DontHaveAccount';
 
 const Login = () => {
   const [isChecked, setIsChecked] = useState(false);
@@ -32,6 +33,7 @@ const Login = () => {
           <TextInput label="Kata Sandi" marginTop={20} isPassword />
           <AutoLogin isChecked={isChecked} handleOnChange={handleOnChange} />
           <Button />
+          <DontHaveAccount />
         </ScrollView>
       </ImageBackground>
     </SafeAreaView>
