@@ -4,6 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import LandingPage from './LandingPage';
 import Register from './Register';
 import Login from './Login';
+import GlobalContextProvider from '../context';
 
 const Stack = createStackNavigator();
 
@@ -14,14 +15,15 @@ const landingPageOptions = {
 const MyStack = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="LandingPage">
-        {/* <Stack.Screen name="Home">{() => <Home />}</Stack.Screen> */}
-        <Stack.Screen options={landingPageOptions} name="Home">
-          {() => <LandingPage />}
-        </Stack.Screen>
-        <Stack.Screen name="Register">{() => <Register />}</Stack.Screen>
-        <Stack.Screen name="Login">{() => <Login />}</Stack.Screen>
-      </Stack.Navigator>
+      <GlobalContextProvider>
+        <Stack.Navigator initialRouteName="LandingPage">
+          <Stack.Screen options={landingPageOptions} name="Home">
+            {() => <LandingPage />}
+          </Stack.Screen>
+          <Stack.Screen name="Register">{() => <Register />}</Stack.Screen>
+          <Stack.Screen name="Login">{() => <Login />}</Stack.Screen>
+        </Stack.Navigator>
+      </GlobalContextProvider>
     </NavigationContainer>
   );
 };

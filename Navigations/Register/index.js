@@ -51,6 +51,7 @@ const Register = () => {
       }),
     });
     const result = await postResult.json();
+    console.log(result);
     setLoadingButton(false);
     const {success, data} = result;
     if (success) {

@@ -1,21 +1,27 @@
-import React, {memo, useState, useCallback} from 'react';
+import React, {memo, useState, useCallback, useContext} from 'react';
 import {
-  Text,
   SafeAreaView,
   ScrollView,
   StyleSheet,
   ImageBackground,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import Logo from './components/Logo';
 import TextInput from '../../components/TextInput';
 import AutoLogin from './components/AutoLogin';
 import Button from './components/Button';
 import DontHaveAccount from './components/DontHaveAccount';
+import {GlobalContextDispatch} from '../../context';
+import {storeLoginData} from '../../context/actions';
+import {LoginEndPoint} from '../../ApiEndpoints';
 
 const Login = () => {
+  const navigation = useNavigation();
+  const dispatch = useContext(GlobalContextDispatch);
   const [isChecked, setIsChecked] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loadingButton, setLoadingButton] = useState(false);
 
   const handleOnChangeEmail = useCallback(text => {
     setEmail(text);
@@ -29,9 +35,32 @@ const Login = () => {
     setIsChecked(e);
   }, []);
 
-  const handleOnPress = useCallback(() => {
-    console.log('clicked');
-  }, []);
+  /**
+   * handle login usecases
+   */
+  const handleOnPress = useCallback(async () => {
+    setLoadingButton(true);
+    const postResult = await fetch(LoginEndPoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    });
+    const result = await postResult.json();
+    setLoadingButton(false);
+    /**
+     * store data to global context
+     */
+    dispatch({type: storeLoginData, data: result});
+    /**
+     * go to scan introduction
+     */
+    navigation.navigate('Register');
+  }, [dispatch, email, navigation, password]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -55,7 +84,7 @@ const Login = () => {
             handleOnChange={handleOnChangePassword}
           />
           <AutoLogin isChecked={isChecked} handleOnChange={handleOnChange} />
-          <Button handleOnPress={handleOnPress} />
+          <Button handleOnPress={handleOnPress} isLoading={loadingButton} />
           <DontHaveAccount />
         </ScrollView>
       </ImageBackground>
