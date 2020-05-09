@@ -6,7 +6,7 @@ const Button = ({text, type, marginTop}) => {
   const navigation = useNavigation();
 
   const handleGoToLoginPage = useCallback(() => {
-    navigation.navigate('Home');
+    navigation.navigate('Login');
   }, [navigation]);
 
   const handleGoToRegisterPage = useCallback(() => {
