@@ -1,6 +1,6 @@
 import React, {memo} from 'react';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import Spinner from '../../../components/Spinner';
 
 const Button = () => {
   return (
