@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React, {memo, useState, useCallback} from 'react';
 import {
   Text,
   SafeAreaView,
@@ -11,6 +11,12 @@ import TextInput from '../../components/TextInput';
 import AutoLogin from './components/AutoLogin';
 
 const Login = () => {
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleOnChange = useCallback(e => {
+    setIsChecked(e);
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
@@ -23,7 +29,7 @@ const Login = () => {
           <Logo />
           <TextInput label="E-mail" marginTop={72} />
           <TextInput label="Kata Sandi" marginTop={20} isPassword />
-          <AutoLogin />
+          <AutoLogin isChecked={isChecked} handleOnChange={handleOnChange} />
         </ScrollView>
       </ImageBackground>
     </SafeAreaView>

@@ -2,12 +2,7 @@ import React, {memo, useState, useCallback} from 'react';
 import CheckBox from '@react-native-community/checkbox';
 import {View, StyleSheet, Text} from 'react-native';
 
-const AutoLogin = () => {
-  const [isChecked, setIsChecked] = useState(false);
-
-  const handleOnChange = useCallback(e => {
-    setIsChecked(e);
-  }, []);
+const AutoLogin = ({isChecked, handleOnChange}) => {
   return (
     <View style={styles.container}>
       <CheckBox
