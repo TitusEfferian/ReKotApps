@@ -83,7 +83,7 @@ const Register = () => {
           />
           <TextInput
             marginTop={8}
-            label="Email"
+            label="E-mail"
             handleOnChange={handleOnChangeEmail}
           />
           <TextInput
