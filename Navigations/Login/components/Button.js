@@ -1,9 +1,9 @@
 import React, {memo} from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 
-const Button = () => {
+const Button = ({handleOnPress}) => {
   return (
-    <TouchableOpacity style={styles.buttonContainer}>
+    <TouchableOpacity style={styles.buttonContainer} onPress={handleOnPress}>
       <Text style={styles.textStyle}>Login</Text>
     </TouchableOpacity>
   );

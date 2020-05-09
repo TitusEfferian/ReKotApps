@@ -14,9 +14,23 @@ import DontHaveAccount from './components/DontHaveAccount';
 
 const Login = () => {
   const [isChecked, setIsChecked] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleOnChangeEmail = useCallback(text => {
+    setEmail(text);
+  }, []);
+
+  const handleOnChangePassword = useCallback(text => {
+    setPassword(text);
+  }, []);
 
   const handleOnChange = useCallback(e => {
     setIsChecked(e);
+  }, []);
+
+  const handleOnPress = useCallback(() => {
+    console.log('clicked');
   }, []);
 
   return (
@@ -29,10 +43,19 @@ const Login = () => {
           contentContainerStyle={styles.scrollViewContent}
           style={styles.scrollViewContainer}>
           <Logo />
-          <TextInput label="E-mail" marginTop={72} />
-          <TextInput label="Kata Sandi" marginTop={20} isPassword />
+          <TextInput
+            label="E-mail"
+            marginTop={72}
+            handleOnChange={handleOnChangeEmail}
+          />
+          <TextInput
+            label="Kata Sandi"
+            marginTop={20}
+            isPassword
+            handleOnChange={handleOnChangePassword}
+          />
           <AutoLogin isChecked={isChecked} handleOnChange={handleOnChange} />
-          <Button />
+          <Button handleOnPress={handleOnPress} />
           <DontHaveAccount />
         </ScrollView>
       </ImageBackground>
