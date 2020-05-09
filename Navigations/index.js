@@ -19,7 +19,7 @@ const MyStack = () => {
   return (
     <NavigationContainer>
       <GlobalContextProvider>
-        <Stack.Navigator initialRouteName="How To Scan">
+        <Stack.Navigator initialRouteName="Home">
           <Stack.Screen options={landingPageOptions} name="Home">
             {() => <LandingPage />}
           </Stack.Screen>
