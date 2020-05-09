@@ -9,6 +9,7 @@ import {
 import Logo from './components/Logo';
 import TextInput from '../../components/TextInput';
 import AutoLogin from './components/AutoLogin';
+import Button from './components/Button';
 
 const Login = () => {
   const [isChecked, setIsChecked] = useState(false);
@@ -30,6 +31,7 @@ const Login = () => {
           <TextInput label="E-mail" marginTop={72} />
           <TextInput label="Kata Sandi" marginTop={20} isPassword />
           <AutoLogin isChecked={isChecked} handleOnChange={handleOnChange} />
+          <Button />
         </ScrollView>
       </ImageBackground>
     </SafeAreaView>
