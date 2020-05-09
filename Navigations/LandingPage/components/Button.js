@@ -9,6 +9,10 @@ const Button = ({text, type, marginTop}) => {
     navigation.navigate('Home');
   }, [navigation]);
 
+  const handleGoToRegisterPage = useCallback(() => {
+    navigation.navigate('Register');
+  }, [navigation]);
+
   if (type === 'login') {
     return (
       <TouchableOpacity
@@ -19,7 +23,9 @@ const Button = ({text, type, marginTop}) => {
     );
   } else if (type === 'daftar') {
     return (
-      <TouchableOpacity style={[styles.DaftarButton, {marginTop}]}>
+      <TouchableOpacity
+        style={[styles.DaftarButton, {marginTop}]}
+        onPress={handleGoToRegisterPage}>
         <Text style={styles.DaftarFont}>{text}</Text>
       </TouchableOpacity>
     );
