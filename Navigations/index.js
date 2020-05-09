@@ -6,6 +6,8 @@ import Register from './Register';
 import Login from './Login';
 import GlobalContextProvider from '../context';
 import ScanTutorial from './ScanTutorial';
+import CameraScanner from './CameraScanner';
+import ReportSubmission from './ReportSubmission';
 
 const Stack = createStackNavigator();
 
@@ -25,6 +27,10 @@ const MyStack = () => {
           <Stack.Screen name="Login">{() => <Login />}</Stack.Screen>
           <Stack.Screen name="How To Scan">
             {() => <ScanTutorial />}
+          </Stack.Screen>
+          <Stack.Screen name="Scanner">{() => <CameraScanner />}</Stack.Screen>
+          <Stack.Screen name="Report Submission">
+            {() => <ReportSubmission />}
           </Stack.Screen>
         </Stack.Navigator>
       </GlobalContextProvider>
