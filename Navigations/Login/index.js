@@ -59,7 +59,7 @@ const Login = () => {
     /**
      * go to scan introduction
      */
-    navigation.navigate('Register');
+    navigation.navigate('How To Scan');
   }, [dispatch, email, navigation, password]);
 
   return (

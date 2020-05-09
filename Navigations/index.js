@@ -5,6 +5,7 @@ import LandingPage from './LandingPage';
 import Register from './Register';
 import Login from './Login';
 import GlobalContextProvider from '../context';
+import ScanTutorial from './ScanTutorial';
 
 const Stack = createStackNavigator();
 
@@ -22,6 +23,9 @@ const MyStack = () => {
           </Stack.Screen>
           <Stack.Screen name="Register">{() => <Register />}</Stack.Screen>
           <Stack.Screen name="Login">{() => <Login />}</Stack.Screen>
+          <Stack.Screen name="How To Scan">
+            {() => <ScanTutorial />}
+          </Stack.Screen>
         </Stack.Navigator>
       </GlobalContextProvider>
     </NavigationContainer>
