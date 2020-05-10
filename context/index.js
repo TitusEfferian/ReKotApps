@@ -6,7 +6,7 @@ export const GlobalContextDispatch = React.createContext();
 
 const GlobalContextProvider = ({children}) => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
-  console.log(state);
+  // console.log(state);
   return (
     <GlobalContextDispatch.Provider value={dispatch}>
       <GlobalContext.Provider value={state}>{children}</GlobalContext.Provider>

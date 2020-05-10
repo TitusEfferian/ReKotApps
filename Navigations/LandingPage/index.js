@@ -1,20 +1,57 @@
-import React, {memo} from 'react';
-import {
-  View,
-  Text,
-  Image,
-  SafeAreaView,
-  StyleSheet,
-  ImageBackground,
-} from 'react-native';
+import React, {memo, useEffect, useContext} from 'react';
+import {SafeAreaView, StyleSheet, ImageBackground} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import AsyncStorage from '@react-native-community/async-storage';
 import Logo from './components/Logo';
 import Title from './components/Title';
 import Button from './components/Button';
 import Footer from './components/Footer';
+import {GlobalContextDispatch, GlobalContext} from '../../context';
+import {storeLoginData} from '../../context/actions';
 
 const Login = () => {
   const navigation = useNavigation();
+  const dispatch = useContext(GlobalContextDispatch);
+  const {loginUseCase} = useContext(GlobalContext);
+
+  /**
+   * check token from storage
+   */
+  useEffect(() => {
+    (async () => {
+      try {
+        const getTokenValue = await AsyncStorage.getItem('login_token');
+        if (getTokenValue !== null) {
+          dispatch({
+            type: storeLoginData,
+            data: {
+              success: true,
+              token: getTokenValue,
+            },
+          });
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, [dispatch]);
+
+  /**
+   * auto login and redirect from login page
+   */
+  useEffect(() => {
+    if (loginUseCase.data) {
+      navigation.reset({
+        index: 0,
+        routes: [
+          {
+            name: 'How To Scan',
+          },
+        ],
+      });
+    }
+  }, [loginUseCase.data, navigation]);
+
   return (
     <SafeAreaView style={style.backgroundLogin}>
       <ImageBackground

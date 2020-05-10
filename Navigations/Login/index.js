@@ -5,7 +5,6 @@ import {
   StyleSheet,
   ImageBackground,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Logo from './components/Logo';
 import TextInput from '../../components/TextInput';
@@ -17,7 +16,6 @@ import {storeLoginData} from '../../context/actions';
 import {LoginEndPoint} from '../../ApiEndpoints';
 
 const Login = () => {
-  const navigation = useNavigation();
   const dispatch = useContext(GlobalContextDispatch);
   const [isChecked, setIsChecked] = useState(false);
   const [email, setEmail] = useState('');
@@ -54,15 +52,11 @@ const Login = () => {
     const result = await postResult.json();
     setLoadingButton(false);
     /**
-     * store data to global context
+     * store data to global context and go to scan page
      */
     dispatch({type: storeLoginData, data: result});
     await AsyncStorage.setItem('login_token', result.data.token);
-    /**
-     * go to scan introduction
-     */
-    navigation.navigate('How To Scan');
-  }, [dispatch, email, navigation, password]);
+  }, [dispatch, email, password]);
 
   return (
     <SafeAreaView style={styles.container}>

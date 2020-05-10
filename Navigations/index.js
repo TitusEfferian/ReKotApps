@@ -17,7 +17,10 @@ const landingPageOptions = {
 
 const MyStack = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      onStateChange={state => {
+        console.log(state.routes[state.index]);
+      }}>
       <GlobalContextProvider>
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen options={landingPageOptions} name="Home">
