@@ -40,7 +40,8 @@ const Login = () => {
    * auto login and redirect from login page
    */
   useEffect(() => {
-    if (loginUseCase.data) {
+    const isTokenAvailable = loginUseCase?.data?.token || '';
+    if (isTokenAvailable) {
       navigation.reset({
         index: 0,
         routes: [
@@ -50,7 +51,7 @@ const Login = () => {
         ],
       });
     }
-  }, [loginUseCase.data, navigation]);
+  }, [loginUseCase, navigation]);
 
   return (
     <SafeAreaView style={style.backgroundLogin}>
