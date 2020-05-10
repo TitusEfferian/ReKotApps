@@ -55,7 +55,11 @@ const Login = () => {
      * store data to global context and go to scan page
      */
     dispatch({type: storeLoginData, data: result});
-    await AsyncStorage.setItem('login_token', result.data.token);
+    try {
+      await AsyncStorage.setItem('login_token', result.token);
+    } catch (err) {
+      console.log(err);
+    }
   }, [dispatch, email, password]);
 
   return (
