@@ -1,6 +1,6 @@
-import React, {memo, useEffect, useContext, useRef} from 'react';
+import React, {memo, useEffect, useContext} from 'react';
 import {SafeAreaView, StyleSheet, ImageBackground} from 'react-native';
-import {useNavigation, StackActions} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Logo from './components/Logo';
 import Title from './components/Title';
@@ -13,7 +13,6 @@ const Login = () => {
   const navigation = useNavigation();
   const dispatch = useContext(GlobalContextDispatch);
   const {loginUseCase} = useContext(GlobalContext);
-  const runOnlyOnce = useRef(true);
 
   /**
    * check token from storage
