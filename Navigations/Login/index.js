@@ -6,6 +6,7 @@ import {
   ImageBackground,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import AsyncStorage from '@react-native-community/async-storage';
 import Logo from './components/Logo';
 import TextInput from '../../components/TextInput';
 import AutoLogin from './components/AutoLogin';
@@ -56,6 +57,7 @@ const Login = () => {
      * store data to global context
      */
     dispatch({type: storeLoginData, data: result});
+    await AsyncStorage.setItem('login_token', result.data.token);
     /**
      * go to scan introduction
      */
