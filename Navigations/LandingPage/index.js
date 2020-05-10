@@ -1,6 +1,6 @@
-import React, {memo, useEffect, useContext} from 'react';
+import React, {memo, useEffect, useContext, useRef} from 'react';
 import {SafeAreaView, StyleSheet, ImageBackground} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, StackActions} from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Logo from './components/Logo';
 import Title from './components/Title';
@@ -13,28 +13,32 @@ const Login = () => {
   const navigation = useNavigation();
   const dispatch = useContext(GlobalContextDispatch);
   const {loginUseCase} = useContext(GlobalContext);
+  const runOnlyOnce = useRef(true);
 
   /**
    * check token from storage
    */
   useEffect(() => {
-    (async () => {
-      try {
-        const getTokenValue = await AsyncStorage.getItem('login_token');
-        if (getTokenValue !== null) {
-          dispatch({
-            type: storeLoginData,
-            data: {
-              success: true,
-              token: getTokenValue,
-            },
-          });
+    const isTokenAvailable = loginUseCase?.data?.token || '';
+    if (!isTokenAvailable) {
+      (async () => {
+        try {
+          const getTokenValue = await AsyncStorage.getItem('login_token');
+          if (getTokenValue !== null) {
+            dispatch({
+              type: storeLoginData,
+              data: {
+                success: true,
+                token: getTokenValue,
+              },
+            });
+          }
+        } catch (err) {
+          console.log(err);
         }
-      } catch (err) {
-        console.log(err);
-      }
-    })();
-  }, [dispatch]);
+      })();
+    }
+  }, [dispatch, loginUseCase]);
 
   /**
    * auto login and redirect from login page
@@ -42,17 +46,9 @@ const Login = () => {
   useEffect(() => {
     const isTokenAvailable = loginUseCase?.data?.token || '';
     if (isTokenAvailable) {
-      navigation.reset({
-        index: 0,
-        routes: [
-          {
-            name: 'How To Scan',
-          },
-        ],
-      });
+      navigation.navigate('How To Scan');
     }
   }, [loginUseCase, navigation]);
-
   return (
     <SafeAreaView style={style.backgroundLogin}>
       <ImageBackground
